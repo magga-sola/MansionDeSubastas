@@ -1,0 +1,22 @@
+{
+    "name": "home_exam_take_two",
+    "version": "1.0.0",
+    "description": "I'm gonna try to get it right this time around",
+    "main": "RESTful_api.js",
+    "scripts": {
+      "test": "./node_modules/mocha/bin/mocha ./test/tests.js",
+      "start": "node index.js"
+    },
+    "author": "me",
+    "license": "ISC",
+    "dependencies": {
+      "body-parser": "^1.19.0",
+      "chai": "^4.2.0",
+      "chai-http": "^4.3.0",
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "js-sha256": "^0.9.0",
+      "mocha": "^7.2.0",
+      "mongoose": "^5.9.16"
+    }
+  }
