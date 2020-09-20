@@ -1,16 +1,24 @@
 const arts = require('../data/collection').arts;
 
 const artService = () => {
-    const getALlArt = () => {
+    const getAllArt = () => {
         return arts;
     };
+
+    const getArtById = () => {
+
+    };
+
+    const createArt = () => {
+
+    };
+
+    return {
+        getAllArt,
+        getArtById,
+        createArt
+    };
+
 };
 
-const getArtById = () => {
-
-};
-
-const createArt = () => {
-
-};
-
+module.exports = artService();

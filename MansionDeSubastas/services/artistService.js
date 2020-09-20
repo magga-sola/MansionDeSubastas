@@ -4,12 +4,22 @@ const artistService = () => {
     const getAllArtists = () => {
         return artists;
     };
+
+
+    const getArtistById = () => {
+
+    };
+
+    const createArtist = () => {
+
+    };
+
+    return {
+        getAllArtists,
+        getArtistById,
+        createArtist
+    };
+
 };
 
-const getArtistById = () => {
-
-};
-
-const createArtist = () => {
-
-};
+module.exports = artistService();
