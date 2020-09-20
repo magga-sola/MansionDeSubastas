@@ -1,15 +1,12 @@
 const apiPath = '/api/';
 const version = "v1"
 
-
 const express = require('express');
 var mongoose = require('mongoose');
-const sha256 = require('js-sha256');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
-var arts = services.artService.arts;
 
 
 // Parse requests of content-type 'application/json'
@@ -21,7 +18,6 @@ app.use(cors());
 app.listen(port, () => {
     console.log('App listening on port ' + port);
 });
-
 
 
 // The old way of doing things:
