@@ -1,6 +1,7 @@
 const apiPath = '/api/';
 const version = "v1"
 
+
 const express = require('express');
 var mongoose = require('mongoose');
 const sha256 = require('js-sha256');
@@ -8,6 +9,7 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
+var arts = services.artService.arts;
 
 
 // Parse requests of content-type 'application/json'
@@ -23,11 +25,7 @@ app.listen(port, () => {
 
 
 // The old way of doing things:
-var arts = [
-    { id: 0, description: "Process driving license application", date: '2020-05-20T10:11:00.000Z' , assigned_personnel: 0},
-    { id: 1, description: "Speeding fine", date: '2020-04-20T10:11:00.000Z', assigned_personnel: 0},
-    { id: 2, description: "a case of a good time", date: '2020-03-20T10:11:00.000Z', assigned_personnel: 3}
-];
+
 
 var personnel = [
     {id: 0, name: "default", password: "default"},
@@ -71,15 +69,71 @@ app.get(apiPath + '/arts/:artsId', (req, res) => {
 });
 
 // /api/arts [POST]
+app.post(apiPath + '/arts', (req, res) => {
+    res.status(200);
+});
+
 // /api/artists [GET]
+app.get(apiPath + '/artists', (req, res) => {
+    res.status(200);
+});
+
 // /api/artists/:artistId [GET]
+app.get(apiPath + '/artists/:artistId', (req, res) => {
+    res.status(200);
+});
+
 // /api/customers [GET]
+app.get(apiPath + '/customers', (req, res) => {
+    res.status(200);
+});
+
 // /api/customers/:id [GET]
+app.get(apiPath + '/customers/:customerId', (req, res) => {
+    res.status(200);
+});
+
 // /api/customers [POST]
+app.post(apiPath + '/customers', (req, res) => {
+    res.status(200);
+});
+
 // /api/customers/:id/auction-bids [GET]
+app.get(apiPath + '/customers/:customerId/auction-bids', (req, res) => {
+    res.status(200);
+});
+
 // /api/auctions [GET]
+app.get(apiPath + '/auctions', (req, res) => {
+    res.status(200);
+});
+
 // /api/auctions/:id [GET]
+app.get(apiPath + '/auctions/:auctionId', (req, res) => {
+    res.status(200);
+});
+
+
 // /api/auctions/:id/winner [GET]
+app.get(apiPath + '/auctions/:auctionId/winner', (req, res) => {
+    res.status(200);
+});
+
+
 // /api/auctions [POST]
+app.post(apiPath + '/auctions', (req, res) => {
+    res.status(200);
+});
+
 // /api/auctions/:id/bids [GET]
+app.get(apiPath + '/auctions/:auctionId/bids', (req, res) => {
+    res.status(200);
+});
+
+
+
 // /api/auctions/:id/bids [POST]
+app.post(apiPath + '/auctions/:auctionId/bids', (req, res) => {
+    res.status(200);
+});
+
