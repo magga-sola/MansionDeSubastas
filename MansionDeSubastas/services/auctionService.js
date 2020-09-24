@@ -1,10 +1,10 @@
-const auctions = require('../data/collection').auctions;
+const auctions = require('../data/db').Auction;
 
     const auctionService = () => {
         const getALlAuctions = () => {
             return auctions;
         };
-        
+
 
 
     const getAuctionById = () => {

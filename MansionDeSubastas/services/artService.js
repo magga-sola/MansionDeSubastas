@@ -1,4 +1,4 @@
-const arts = require('../data/collection').arts;
+const arts = require('../data/db').Art;
 
 const artService = () => {
     const getAllArt = () => {

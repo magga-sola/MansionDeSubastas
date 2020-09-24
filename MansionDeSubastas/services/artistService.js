@@ -1,18 +1,31 @@
-const artists = require('../data/collection').artists;
+const artists = require('../data/db').Artist;
 
 const artistService = () => {
-    const getAllArtists = () => {
-        return artists;
+
+    const getAllArtists = async () => {
+        return await globalTryCatch(async () => {
+          const artists = await Artist.find({});
+          return artists
+        })
     };
 
 
-    const getArtistById = () => {
-
+    const getArtistById = async id => {
+      try {
+        const artist = await Artist.findbyId(id);
+        return artist
+      } catch(err) {
+        return err;
+      }
     };
 
-    const createArtist = () => {
-
+    function createArtist = (artist, successCb, errorCb) {
+      Artist.create(artist, function(err, result) {
+        if (err) {errorCb(err); }
+        else { successCb(result); }
+      });
     };
+
 
     return {
         getAllArtists,

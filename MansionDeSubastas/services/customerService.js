@@ -1,4 +1,5 @@
-const customers = require('../data/collection').customers;
+const customers = require('../data/db').Customer;
+const auctionBids = require('../data/db').AuctionBid;
 
 const customerService = () => {
     const getAllCustomers = () => {
