@@ -1,16 +1,27 @@
-const arts = require('../data/db').Art;
+const art = require('../data/db').Art;
 
 const artService = () => {
     const getAllArt = () => {
-        return arts;
+      return await globalTryCatch(async () => {
+        const art = await Art.find({});
+        return art
+      })
+
+
+    const getArtById = async id => {
+      try {
+        const artist = await Artist.findbyId(id);
+        return artist
+      } catch(err) {
+        return err;
+      }
     };
 
-    const getArtById = () => {
-
-    };
-
-    const createArt = () => {
-
+    function createArt = (art, successCb, errorCb) => {
+      Art.create(art, function(err, result) {
+        if (err) {errorCb(err); }
+        else { successCb(result); }
+      });
     };
 
     return {

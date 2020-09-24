@@ -3,7 +3,10 @@ const auctionBids = require('../data/db').AuctionBid;
 
 const customerService = () => {
     const getAllCustomers = () => {
-        return customers;
+      return await globalTryCatch(async () => {
+        const customers = await Customer.find({});
+        return customers
+      })
     };
 
 

@@ -1,22 +1,33 @@
 const auctions = require('../data/db').Auction;
 
     const auctionService = () => {
-        const getALlAuctions = () => {
-            return auctions;
+        const getAllAuctions = () => {
+          return await globalTryCatch(async () => {
+            const auctions = await Auction.find({});
+            return auctions
+          })
         };
 
 
 
-    const getAuctionById = () => {
-
+    const getAuctionById = async id => {
+      try {
+        const artist = await Artist.findbyId(id);
+        return artist
+      } catch(err) {
+        return err;
+      }
     };
 
     const getWinnerByAuctionId = () => {
 
     };
 
-    const createAuction = () => {
-
+    function createAuction = (auction, successCb, errorCb) {
+      Auction.create(auction, function(err, result) {
+        if (err) { errorCb(err); }
+        else { successCb(result); }
+      });
     };
 
     const getBidsByAuctionId = () => {
@@ -29,7 +40,7 @@ const auctions = require('../data/db').Auction;
 
 
     return {
-        getALlAuctions,
+        getAllAuctions,
         getAuctionById,
         getWinnerByAuctionId,
         createAuction,
