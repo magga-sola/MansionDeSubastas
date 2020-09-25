@@ -35,6 +35,7 @@ const customerService = () => {
       });
     };
 
+    //api/customers/:id/auction-bids [GET]
     const getAuctionbidsByCustomerId = () => {
 
     };

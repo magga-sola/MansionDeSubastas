@@ -27,10 +27,15 @@ const globalTryCatch = async cb => {
       }
     };
 
+    ///api/auctions/:id/winner [GET]
+    // If the auction is not finished the web service should return a status code 409 (Conflict), 
+    //otherwise it should return the customer which holds the highest bid. If the auction had no bids, it
+    //should return a status code 200 (OK) with the message: ‘This auction had no bids.’.
     const getWinnerByAuctionId = () => {
 
     };
 
+    //ekki alveg rétt held ég
     function createAuction(auction, successCb, errorCb) {
       Auction.create(auction, function(err, result) {
         if (err) { errorCb(err); }
@@ -38,6 +43,7 @@ const globalTryCatch = async cb => {
       });
     };
 
+    ///api/auctions/:id/bids [GET]
     const getBidsByAuctionId = () => {
 
     };

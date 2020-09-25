@@ -17,7 +17,6 @@ const artistService = () => {
         })
     };
 
-
     const getArtistById = async id => {
       try {
         const artist = await Artist.findbyId(id);
