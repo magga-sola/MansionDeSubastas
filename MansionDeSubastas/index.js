@@ -100,6 +100,7 @@ app.get(apiPath + '/auctions', async function(req, res) {
   return res.json(auctions);
 });
 
+
 // /api/auctions/:id [GET]
 app.get(apiPath + '/auctions/:auctionId', async function(req, res) {
     const auctionId = req.params.auctionId;
@@ -124,8 +125,10 @@ app.post(apiPath + '/auctions', function(req, res) {
 });
 
 // /api/auctions/:id/bids [GET]
-app.get(apiPath + '/auctions/:auctionId/bids', (req, res) => {
-    return res.status(200);
+app.get(apiPath + '/auctions/:auctionId/bids', async function(req, res) {
+  const auctionId = req.params.auctionId;
+  const auctionBids = await auctionService.getBidsByAuctionId(auctionId);
+  return res.status(200).json(auctionBids);
 });
 
 

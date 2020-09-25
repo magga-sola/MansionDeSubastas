@@ -1,4 +1,6 @@
+const db = require("../data/db");
 const Auction = require('../data/db').Auction;
+const AuctionBid = require('../data/db').AuctionBid;
 
 const auctionService = () => {
 
@@ -42,9 +44,24 @@ const auctionService = () => {
       });
     };
 
-    ///api/auctions/:id/bids [GET]
-    const getBidsByAuctionId = () => {
+    //const getBidsByAuctionId = async (auctionId, cb, errorCb) => {
+    //  try {
+    //    const auctionbids = await db.AuctionBid.find({auctionId: auctionId});
+    //    return auctionbids;
+    //  } catch(err){
+    //    return err;
+    //  }
+    //}
 
+    ///api/auctions/:id/bids [GET]
+    const getBidsByAuctionId = async (auctionId, cb, errorCb) => {
+
+      try {
+        const auctionbids = await AuctionBid.find({ auctionId: auctionId });
+        return auctionbids;
+      } catch(err) {
+        return err;
+      }
     };
 
     const createBidByAuctionId = () => {
