@@ -19,7 +19,7 @@ const auctionService = () => {
 
     const getAuctionById = async id => {
       try {
-        const auction = await Auction.findbyId(id);
+        const auction = await Auction.findById(id);
         return artist
       } catch(err) {
         return err;

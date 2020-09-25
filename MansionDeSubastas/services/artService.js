@@ -19,7 +19,7 @@ const artService = () => {
 
     const getArtById = async id => {
       try {
-        const art = await Art.findbyId(id);
+        const art = await Art.findById(id);
         return art;
       } catch(err) {
         return err;
