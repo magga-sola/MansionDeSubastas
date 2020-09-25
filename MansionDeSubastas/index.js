@@ -137,8 +137,9 @@ app.post(apiPath + '/auctions', function(req, res) {
 app.get(apiPath + '/auctions/:auctionId/bids', async function(req, res) {
   const auctionId = req.params.auctionId;
   const auctionBids = await auctionService.getBidsByAuctionId(auctionId);
-  return res.status(200).json(auctionBids);
+  return res.json(auctionBids);
 });
+
 
 // /api/auctions/:id/bids [POST]
 app.post(apiPath + '/auctions/:auctionId/bids', function(req, res) {
@@ -149,6 +150,7 @@ app.post(apiPath + '/auctions/:auctionId/bids', function(req, res) {
   });  
 });
 
+
 app.post("/api/auctions/:id/bids", function(req, res) {
   auctionService.createAuctionBid( req.body, function(auctionBid) {
       return res.status(201).json(auctionBid);
@@ -157,13 +159,3 @@ app.post("/api/auctions/:id/bids", function(req, res) {
     }
   );
 });
-
-
-app.get("/api/auctions/:id/bids", async function(req, res) {
-  const result = await auctionService.getBidsByAuctionId(
-    req.params.id
-  );
-  return res.status(result.status).json(result.body);
-});
-
-

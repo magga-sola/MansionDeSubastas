@@ -1,7 +1,5 @@
-const { AuctionBid } = require('../data/db');
-
 const Customer = require('../data/db').Customer;
-const AuctionBids = require('../data/db').AuctionBid;
+const AuctionBid = require('../data/db').AuctionBid;
 
 
 const customerService = () => {
@@ -40,7 +38,7 @@ const customerService = () => {
 
     //api/customers/:id/auction-bids [GET]
     const getAuctionbidsByCustomerId = async (id, successCb, errorCb) => {
-      const auctionBids = await AuctionBid.find({customerId: id});
+      const auctionBids = await AuctionBid.find({'customerId': id});
       if (auctionBids == null) {
         return status(400);
       } else {

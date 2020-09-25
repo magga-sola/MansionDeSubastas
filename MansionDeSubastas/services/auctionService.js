@@ -1,5 +1,3 @@
-const db = require("../data/db");
-const auction = require("../schemas/auction");
 const Auction = require('../data/db').Auction;
 const AuctionBid = require('../data/db').AuctionBid;
 
@@ -39,7 +37,7 @@ const auctionService = () => {
       auction = Auction.findById(id);
 
       if (auction.endDate < Date.now()) {
-        if (winningBid = AuctionBid.find({auctionId: auction.id}).sort("-price").limit(1)) {
+        if (winningBid = AuctionBid.find({'auctionId': auction.id}).sort("-price").limit(1)) {
         return winningBid;
       }
         else{
@@ -51,22 +49,25 @@ const auctionService = () => {
     };
 
     function createAuction(auction, successCb, errorCb) {
+      if (auction.isAuctionItem == true) {
       Auction.create(auction, function(err, result) {
         if (err) { errorCb(err); }
         else { successCb(result); }
-      });
+      });} else {
+        return status(412);
+      }
     };
 
 
     ///api/auctions/:id/bids [GET]
     const getBidsByAuctionId = async (id, cb, errorCb) => {
 
-      try {
-        const auctionbids = await AuctionBid.find({ auctionId: id });
-        return auctionbids;
-      } catch(err) {
-        return err;
-      }
+      return await AuctionBid.find({ 'auctionId': id }, (err, auctionBids) => {
+        if (err) {
+          errorCb(err);
+        }
+        return auctionBids
+      })
     };
 
 
@@ -75,20 +76,29 @@ const auctionService = () => {
 
     const createAuctionBid = async (auctionBid, cb, errorCb) => {
       //get winning bid to test if it's less than the new bid
-      const auction = await Auction.find({auctionId: auctionBid.auctionId});
+      const biddingAuction = await Auction.find({'auctionId': auctionBid.auctionId});
+      const winningBid = AuctionBid.find({'auctionId': auction.id}).sort("-price").limit(1);
 
       // check if auction is done
-      if (auction.endDate < Date.now()) {
+      if (biddingAuction.endDate < Date.now()) {
         return status(409).json("This auction is no longer open")
       }
       //check if new bid is higher than the minimum price
-      if (auctionBid.price > auction.minimumPrice) {
+      if (auctionBid.price > biddingAuction.minimumPrice) {
 
         AuctionBid.create(auctionBid, function(err, result) {
           if (err) { errorCb(err); }
           else { successCb(result); }
         });
 
+        //check if we need to update the highest bidder
+        if (auctionbid.price > winningBid.price) {
+
+          biddingAuction.updateOne({auctionWinner: auctionbid.costumerId}, auctionbid, function(err, result) {
+            if (err) {errorCb(err);} 
+            else { successCb();}
+          });
+        }
       } else { 
         return status("412").json("bid not high enough!")
       }
