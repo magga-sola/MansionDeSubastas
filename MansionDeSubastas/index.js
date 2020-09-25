@@ -82,14 +82,6 @@ app.post(apiPath + '/customers', function(req, res) {
   });
 });
 
-app.post(apiPath + '/art', function(req, res) {
-  artService.createArt(req.body, function(art) {
-    return res.status(201).json(art);
-  }, function(err) {
-    return res.status(400).json(err)
-  });
-});
-
 // /api/customers/:id/auction-bids [GET]
 app.get(apiPath + '/customers/:customerId/auction-bids', (req, res) => {
     return res.status(200);
@@ -102,8 +94,10 @@ app.get(apiPath + '/auctions', async function(req, res) {
 });
 
 // /api/auctions/:id [GET]
-app.get(apiPath + '/auctions/:auctionId', (req, res) => {
-    return res.status(200);
+app.get(apiPath + '/auctions/:auctionId', async function(req, res) {
+    const auctionId = req.params.auctionId;
+    const auction = await auctionService.getAuctionById(auctionId);
+    return res.json(auction);
 });
 
 
