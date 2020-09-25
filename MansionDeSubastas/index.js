@@ -120,7 +120,6 @@ app.get(apiPath + '/auctions', async function(req, res) {
   return res.json(auctions);
 });
 
-
 // /api/auctions/:id [GET]
 app.get(apiPath + '/auctions/:auctionId', async function(req, res) {
     const auctionId = req.params.auctionId;
@@ -138,7 +137,6 @@ app.get(apiPath + '/auctions/:auctionId/winner', async function(req, res) {
   return res.json(winner);
 });
 
-
 // /api/auctions [POST]
 app.post(apiPath + '/auctions', function(req, res) {
     auctionService.createAuction(req.body, function(auction) {
@@ -155,7 +153,6 @@ app.get(apiPath + '/auctions/:auctionId/bids', async function(req, res) {
   return res.json(auctionBids);
 });
 
-
 // /api/auctions/:id/bids [POST]
 app.post(apiPath + '/auctions/:auctionId/bids', function(req, res) {
   auctionService.createAuctionBid(req.body, function(auctionBid) {
@@ -163,16 +160,6 @@ app.post(apiPath + '/auctions/:auctionId/bids', function(req, res) {
   }, function (err) {
     return res.status(400).json(err);
   });  
-});
-
-
-app.post("/api/auctions/:id/bids", function(req, res) {
-  auctionService.createAuctionBid( req.body, function(auctionBid) {
-      return res.status(201).json(auctionBid);
-    },function(err) {
-      return res.status(400).json(err);
-    }
-  );
 });
 
 
