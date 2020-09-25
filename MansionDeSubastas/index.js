@@ -36,9 +36,11 @@ app.get(apiPath + '/art', async function(req, res) {
   return res.json(art);
 });
 
-// /api/art/:artsid [GET]
-app.get(apiPath + '/art/:artsId', (req, res) => {
-    return res.status(200);
+// /api/art/:artid [GET]
+app.get(apiPath + '/art/:artId', async function(req, res) {
+    const artId = req.params.artId;
+    const art = await artService.getArtById(artId);
+    return res.json(art);
 });
 
 // /api/art [POST]
@@ -58,8 +60,10 @@ app.get(apiPath + '/artists', async function(req, res) {
 });
 
 // /api/artists/:artistId [GET]
-app.get(apiPath + '/artists/:artistId', (req, res) => {
-    return res.status(200);
+app.get(apiPath + '/artists/:artistId', async function(req, res) {
+    const artistId = req.params.artistId;
+    const artist = await artistService.getArtistById(artistId);
+    return res.json(artist);
 });
 
 // /api/customers [GET]
