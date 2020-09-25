@@ -41,8 +41,7 @@ app.get(apiPath + '/art/:artId', async function(req, res) {
     const art = await artService.getArtById(artId)
     if (art === null){
         return res.status(404).json({"message":"Art with ID" + req.params.artId + "does not exist"});
-    }
-    return res.json(art);
+    }  return res.json(art);
 });
 
 // /api/art [POST]
@@ -162,11 +161,11 @@ app.post(apiPath + '/auctions/:auctionId/bids', function(req, res) {
     return res.status(200).json(auctionBid);
   }, function (err) {
     return res.status(400).json(err);
-  });  
+  });
 });
 
 
-app.post("/api/auctions/:id/bids", function(req, res) {
+app.post(apiPath + "/auctions/:id/bids", function(req, res) {
   auctionService.createAuctionBid( req.body, function(auctionBid) {
       return res.status(201).json(auctionBid);
     },function(err) {
