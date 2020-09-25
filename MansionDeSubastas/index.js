@@ -72,9 +72,12 @@ app.get(apiPath + '/customers', async function(req, res) {
 });
 
 // /api/customers/:id [GET]
-app.get(apiPath + '/customers/:customerId', (req, res) => {
-    return res.status(200);
+app.get(apiPath + '/customers/:customerId', async function(req, res) {
+  const customerId = req.params.customerId;
+  const customer = await customerService.getCustomerById(customerId);
+  return res.json(customer);
 });
+
 
 // /api/customers [POST]
 app.post(apiPath + '/customers', function(req, res) {
