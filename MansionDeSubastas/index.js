@@ -9,11 +9,6 @@ var port = process.env.PORT || 3000;
 const artService = require('./services/artService');
 const artistService = require('./services/artistService');
 const customerService = require('./services/customerService');
-console.log(artistService);
-console.log(customerService);
-console.log(artService);
-
-
 const app = express();
 
 

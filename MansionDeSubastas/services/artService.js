@@ -1,6 +1,5 @@
 const Art = require('../data/db').Art;
 
-
 const artService = () => {
 
   const globalTryCatch = async cb => {
@@ -17,6 +16,7 @@ const artService = () => {
         return art
       });
     }
+
 
     const getArtById = async id => {
       try {
