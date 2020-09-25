@@ -14,7 +14,7 @@ const artistService = () => {
         return await globalTryCatch(async () => {
           const artists = await Artist.find({});
           return artists
-        })
+        });
     };
 
     const getArtistById = async id => {
@@ -38,7 +38,6 @@ const artistService = () => {
         getArtistById,
         createArtist
     };
-
 };
 
 module.exports = artistService();
