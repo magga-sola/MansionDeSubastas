@@ -1,4 +1,4 @@
-const artists = require('../data/db').Artist;
+const Artist = require('../data/db').Artist;
 
 const artistService = () => {
 
