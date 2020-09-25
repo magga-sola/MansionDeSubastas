@@ -1,3 +1,5 @@
+const { Customer } = require('../data/db');
+
 const customers = require('../data/db').Customer;
 const auctionBids = require('../data/db').AuctionBid;
 
@@ -17,13 +19,20 @@ const customerService = () => {
       })
     };
 
-
-    const getCustomerById = () => {
-
+    const getCustomerById = async id => {
+      try {
+        const customer = await Customer.findById(id);
+        return customer;
+      } catch(err){
+        return err;
+      }
     };
 
-    const createCustomer = () => {
-
+    function createCustomer(customer, successCb, errorCb) {
+      Customer.create(customer, function(err, result){
+        if (err) {errorCb(err); }
+        else {successCb(result);}
+      });
     };
 
     const getAuctionbidsByCustomerId = () => {
@@ -33,6 +42,7 @@ const customerService = () => {
     return {
         getAllCustomers,
         getCustomerById,
+        createCustomer,
         getAuctionbidsByCustomerId
 
     };

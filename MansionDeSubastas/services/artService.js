@@ -13,19 +13,19 @@ const artService = () => {
       return await globalTryCatch(async () => {
         const art = await Art.find({});
         return art
-      })
-
+      });
+    }
 
     const getArtById = async id => {
       try {
-        const artist = await Artist.findbyId(id);
-        return artist
+        const art = await Art.findbyId(id);
+        return art;
       } catch(err) {
         return err;
       }
     };
 
-    function createArt = (art, successCb, errorCb) => {
+    function createArt(art, successCb, errorCb) {
       Art.create(art, function(err, result) {
         if (err) {errorCb(err); }
         else { successCb(result); }

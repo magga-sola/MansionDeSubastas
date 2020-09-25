@@ -1,3 +1,5 @@
+const { Auction } = require('../data/db');
+
 const auctions = require('../data/db').Auction;
 
 const globalTryCatch = async cb => {
@@ -18,7 +20,7 @@ const globalTryCatch = async cb => {
 
     const getAuctionById = async id => {
       try {
-        const artist = await Artist.findbyId(id);
+        const auction = await Auction.findbyId(id);
         return artist
       } catch(err) {
         return err;
@@ -29,7 +31,7 @@ const globalTryCatch = async cb => {
 
     };
 
-    function createAuction = (auction, successCb, errorCb) {
+    function createAuction(auction, successCb, errorCb) {
       Auction.create(auction, function(err, result) {
         if (err) { errorCb(err); }
         else { successCb(result); }
