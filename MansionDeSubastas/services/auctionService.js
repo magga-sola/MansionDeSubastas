@@ -21,12 +21,10 @@ const auctionService = () => {
     };
 
     const getAuctionById = async id => {
-      try {
+      return await globalTryCatch(async () => {
         const auction = await Auction.findById(id);
         return auction
-      } catch(err) {
-        return err;
-      }
+      })
     };
 
 

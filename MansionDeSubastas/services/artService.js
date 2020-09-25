@@ -2,13 +2,13 @@ const Art = require('../data/db').Art;
 
 const artService = () => {
 
-  const globalTryCatch = async cb => {
-    try {
-      return await cb();
-    } catch(err) {
-      return err;
+    const globalTryCatch = async cb => {
+        try {
+          return await cb();
+        } catch(err) {
+          return err //, {status: 500};
+        }
     }
-  }
 
     const getAllArt = async () => {
       return await globalTryCatch(async () => {
@@ -22,7 +22,7 @@ const artService = () => {
         const art = await Art.findById(id);
         return art;
       });
-    }
+    };
 
 
     function createArt(art, successCb, errorCb) {

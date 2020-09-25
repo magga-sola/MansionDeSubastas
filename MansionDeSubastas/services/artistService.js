@@ -8,7 +8,7 @@ const artistService = () => {
         } catch(err) {
           return err;
         }
-      }
+    }
 
     const getAllArtists = async () => {
         return await globalTryCatch(async () => {
