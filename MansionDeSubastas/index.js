@@ -36,9 +36,11 @@ app.get(apiPath + '/art', async function(req, res) {
   return res.json(art);
 });
 
-// /api/art/:artsid [GET]
-app.get(apiPath + '/art/:artsId', (req, res) => {
-    return res.status(200);
+// /api/art/:artid [GET]
+app.get(apiPath + '/art/:artId', async function(req, res) {
+    const artId = req.params.artId;
+    const art = await artService.getArtById(artId);
+    return res.json(art);
 });
 
 // /api/art [POST]

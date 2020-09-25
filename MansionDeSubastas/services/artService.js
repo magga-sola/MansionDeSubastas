@@ -17,7 +17,6 @@ const artService = () => {
       });
     }
 
-
     const getArtById = async id => {
       try {
         const art = await Art.findbyId(id);
