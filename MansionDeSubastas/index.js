@@ -74,7 +74,6 @@ app.post(apiPath + '/artists', function(req, res) {
     });
   });
 
-
 // /api/customers [GET]
 app.get(apiPath + '/customers', async function(req, res) {
   const customers = await customerService.getAllCustomers();
