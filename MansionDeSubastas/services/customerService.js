@@ -48,7 +48,6 @@ const customerService = () => {
         getCustomerById,
         createCustomer,
         getAuctionbidsByCustomerId
-
     };
 
 };

@@ -33,7 +33,6 @@ const artistService = () => {
       });
     };
 
-
     return {
         getAllArtists,
         getArtistById,

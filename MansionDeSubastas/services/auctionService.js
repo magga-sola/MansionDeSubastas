@@ -52,7 +52,6 @@ const auctions = require('../data/db').Auction;
 
     };
 
-
     return {
         getAllAuctions,
         getAuctionById,
@@ -60,7 +59,6 @@ const auctions = require('../data/db').Auction;
         createAuction,
         getBidsByAuctionId,
         createBidByAuctionId
-
     };
 
 };
