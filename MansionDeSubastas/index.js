@@ -30,13 +30,13 @@ app.listen(port, () => {
 
 
 // /api/arts [GET]
-app.get(apiPath + '/art', async function(req, res) {
+app.get(apiPath + '/arts', async function(req, res) {
   const art = await artService.getAllArt();
   return res.json(art);
 });
 
-// /api/art/:artid [GET]
-app.get(apiPath + '/art/:artId', async function(req, res) {
+// /api/arts/:artid [GET]
+app.get(apiPath + '/arts/:artId', async function(req, res) {
     const artId = req.params.artId;
     const art = await artService.getArtById(artId)
     if (art === null){
@@ -44,8 +44,8 @@ app.get(apiPath + '/art/:artId', async function(req, res) {
     }  return res.json(art);
 });
 
-// /api/art [POST]
-app.post(apiPath + '/art', function(req, res) {
+// /api/arts [POST]
+app.post(apiPath + '/arts', function(req, res) {
   artService.createArt(req.body, function(art) {
     return res.status(201).json(art);
   }, function(err) {
@@ -119,7 +119,6 @@ app.get(apiPath + '/auctions', async function(req, res) {
   return res.json(auctions);
 });
 
-
 // /api/auctions/:id [GET]
 app.get(apiPath + '/auctions/:auctionId', async function(req, res) {
     const auctionId = req.params.auctionId;
@@ -137,7 +136,6 @@ app.get(apiPath + '/auctions/:auctionId/winner', async function(req, res) {
   return res.json(winner);
 });
 
-
 // /api/auctions [POST]
 app.post(apiPath + '/auctions', function(req, res) {
     auctionService.createAuction(req.body, function(auction) {
@@ -154,7 +152,6 @@ app.get(apiPath + '/auctions/:auctionId/bids', async function(req, res) {
   return res.json(auctionBids);
 });
 
-
 // /api/auctions/:id/bids [POST]
 app.post(apiPath + '/auctions/:auctionId/bids', function(req, res) {
   auctionService.createAuctionBid(req.body, function(auctionBid) {
@@ -165,11 +162,6 @@ app.post(apiPath + '/auctions/:auctionId/bids', function(req, res) {
 });
 
 
-app.post(apiPath + "/auctions/:id/bids", function(req, res) {
-  auctionService.createAuctionBid( req.body, function(auctionBid) {
-      return res.status(201).json(auctionBid);
-    },function(err) {
-      return res.status(400).json(err);
-    }
-  );
+app.use('*', (req, res) => {
+    res.status(405).json({"message":'Error, method is not supported'});
 });
