@@ -1,4 +1,4 @@
-const apiPath = '/api/';
+const apiPath = '/api';
 const version = "v1"
 
 const express = require('express');
@@ -39,13 +39,13 @@ app.get(apiPath + '/art', async function(req, res) {
   return res.json(art);
 });
 
-// /api/arts/:artsid [GET]
-app.get(apiPath + '/arts/:artsId', (req, res) => {
+// /api/art/:artsid [GET]
+app.get(apiPath + '/art/:artsId', (req, res) => {
     return res.status(200);
 });
 
-// /api/arts [POST]
-app.post(apiPath + '/arts', (req, res) => {
+// /api/art [POST]
+app.post(apiPath + '/art', (req, res) => {
     return res.status(200);
 });
 

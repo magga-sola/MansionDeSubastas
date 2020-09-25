@@ -1,4 +1,4 @@
-const art = require('../data/db').Art;
+const Art = require('../data/db').Art;
 
 
 const artService = () => {
