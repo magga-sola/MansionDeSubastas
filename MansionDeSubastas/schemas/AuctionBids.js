@@ -1,8 +1,7 @@
 const Schema = require('mongoose').Schema;
 
 module.exports = new Schema({
-  name: { type: String, required: true },
-  description: String,
-  type: { type: Schema.Types.ObjectId, required: true },
-  dateOfDiscovery: { type: Date, required: true }
+  auctionId: {type: Schema.Types.ObjectId, required: true},
+  customerId: {type: Schema.Types.ObjectId, required: true},
+  price: {type: Number, required: true}
 });
