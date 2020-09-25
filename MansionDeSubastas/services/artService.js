@@ -18,13 +18,12 @@ const artService = () => {
     }
 
     const getArtById = async id => {
-      try {
+      return await globalTryCatch(async () => {
         const art = await Art.findById(id);
         return art;
-      } catch(err) {
-        return err;
-      }
-    };
+      });
+    }
+
 
     function createArt(art, successCb, errorCb) {
       Art.create(art, function(err, result) {

@@ -18,13 +18,11 @@ const artistService = () => {
     };
 
     const getArtistById = async id => {
-      try {
-        const artist = await Artist.findById(id);
-        return artist
-      } catch(err) {
-        return err;
+        return await globalTryCatch(async () => {
+          const artist = await Artist.findById(id);
+          return artist;
+        });
       }
-    };
 
     function createArtist(artist, successCb, errorCb) {
       Artist.create(artist, function(err, result) {

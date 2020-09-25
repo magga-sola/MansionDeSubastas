@@ -40,6 +40,9 @@ app.get(apiPath + '/art', async function(req, res) {
 app.get(apiPath + '/art/:artId', async function(req, res) {
     const artId = req.params.artId;
     const art = await artService.getArtById(artId);
+    if (!art){
+        res.status(404).json({"message":"No art with this ID"});
+    }
     return res.json(art);
 });
 
