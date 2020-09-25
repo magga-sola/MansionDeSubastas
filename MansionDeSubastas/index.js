@@ -42,8 +42,12 @@ app.get(apiPath + '/art/:artsId', (req, res) => {
 });
 
 // /api/art [POST]
-app.post(apiPath + '/art', (req, res) => {
-    return res.status(200);
+app.post(apiPath + '/art', function(req, res) {
+  artService.createArt(req.body, function(art) {
+    return res.status(201).json(art);
+  }, function(err) {
+    return res.status(400).json(err)
+  });
 });
 
 // /api/artists [GET]
@@ -70,8 +74,20 @@ app.get(apiPath + '/customers/:customerId', (req, res) => {
 });
 
 // /api/customers [POST]
-app.post(apiPath + '/customers', (req, res) => {
-    return res.status(200);
+app.post(apiPath + '/customers', function(req, res) {
+  customerService.createCustomer(req.body, function(customer) {
+    return res.status(200).json(customer);
+  }, function (err) {
+    return res.status(400).json(err);
+  });
+});
+
+app.post(apiPath + '/art', function(req, res) {
+  artService.createArt(req.body, function(art) {
+    return res.status(201).json(art);
+  }, function(err) {
+    return res.status(400).json(err)
+  });
 });
 
 // /api/customers/:id/auction-bids [GET]
@@ -98,8 +114,12 @@ app.get(apiPath + '/auctions/:auctionId/winner', (req, res) => {
 
 
 // /api/auctions [POST]
-app.post(apiPath + '/auctions', (req, res) => {
-    return res.status(200);
+app.post(apiPath + '/auctions', function(req, res) {
+    auctionService.createAuction(req.body, function(auction) {
+      return res.status(200).json(auction);
+    }, function(err) {
+      return res.status(400).json(err)
+    });
 });
 
 // /api/auctions/:id/bids [GET]
