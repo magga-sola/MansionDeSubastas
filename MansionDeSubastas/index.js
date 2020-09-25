@@ -45,9 +45,10 @@ app.post(apiPath + '/art', (req, res) => {
 });
 
 // /api/artists [GET]
-app.get(apiPath + '/artists', (req, res) => {
+app.get(apiPath + '/artists', async function(req, res) {
     //return res.status(200);
-    return res.json(artistService.getAllArtists())
+    const art = await artService.getAllArt();
+    return res.json(art);
 });
 
 // /api/artists/:artistId [GET]
@@ -56,8 +57,9 @@ app.get(apiPath + '/artists/:artistId', (req, res) => {
 });
 
 // /api/customers [GET]
-app.get(apiPath + '/customers', (req, res) => {
-    return res.status(200);
+app.get(apiPath + '/customers', async function(req, res) {
+  const art = await artService.getAllArt();
+  return res.json(art);
 });
 
 // /api/customers/:id [GET]
@@ -76,8 +78,9 @@ app.get(apiPath + '/customers/:customerId/auction-bids', (req, res) => {
 });
 
 // /api/auctions [GET]
-app.get(apiPath + '/auctions', (req, res) => {
-    return res.status(200);
+app.get(apiPath + '/auctions', async function(req, res) {
+  const art = await artService.getAllArt();
+  return res.json(art);
 });
 
 // /api/auctions/:id [GET]
