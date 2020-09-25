@@ -1,5 +1,13 @@
 const auctions = require('../data/db').Auction;
 
+const globalTryCatch = async cb => {
+  try {
+    return await cb();
+  } catch(err) {
+    return err;
+  }
+}
+
     const auctionService = () => {
         const getAllAuctions = () => {
           return await globalTryCatch(async () => {
@@ -7,8 +15,6 @@ const auctions = require('../data/db').Auction;
             return auctions
           })
         };
-
-
 
     const getAuctionById = async id => {
       try {

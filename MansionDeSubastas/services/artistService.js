@@ -1,5 +1,13 @@
 const artists = require('../data/db').Artist;
 
+const globalTryCatch = async cb => {
+    try {
+      return await cb();
+    } catch(err) {
+      return err;
+    }
+  }
+
 const artistService = () => {
 
     const getAllArtists = async () => {
@@ -19,7 +27,7 @@ const artistService = () => {
       }
     };
 
-    function createArtist = (artist, successCb, errorCb) {
+    function createArtist(artist, successCb, errorCb) {
       Artist.create(artist, function(err, result) {
         if (err) {errorCb(err); }
         else { successCb(result); }

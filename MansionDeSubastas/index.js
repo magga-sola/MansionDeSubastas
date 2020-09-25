@@ -53,6 +53,7 @@ app.post(apiPath + '/arts', (req, res) => {
 // /api/artists [GET]
 app.get(apiPath + '/artists', (req, res) => {
     return res.status(200);
+//    return res.json(artistService.getAllArtists())
 });
 
 // /api/artists/:artistId [GET]

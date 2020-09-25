@@ -1,5 +1,13 @@
 const art = require('../data/db').Art;
 
+const globalTryCatch = async cb => {
+    try {
+      return await cb();
+    } catch(err) {
+      return err;
+  }
+}
+
 const artService = () => {
     const getAllArt = () => {
       return await globalTryCatch(async () => {
