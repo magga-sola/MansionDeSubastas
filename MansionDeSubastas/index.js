@@ -54,7 +54,6 @@ app.post(apiPath + '/art', function(req, res) {
 
 // /api/artists [GET]
 app.get(apiPath + '/artists', async function(req, res) {
-    //return res.status(200);
     const artists = await artistService.getAllArtists();
     return res.json(artists);
 });
