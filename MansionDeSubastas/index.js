@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 //Tell express to use cors -- enables CORS for this backend
 app.use(cors());
 
-app.listen(port, () => {
+app.listen(port, () => {
     console.log('App listening on port ' + port);
 });
 
