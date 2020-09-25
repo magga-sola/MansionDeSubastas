@@ -28,6 +28,7 @@ const customerService = () => {
       }
     };
 
+
     function createCustomer(customer, successCb, errorCb) {
       Customer.create(customer, function(err, result){
         if (err) {errorCb(err); }
