@@ -34,8 +34,9 @@ app.listen(port, () => {
 
 
 // /api/arts [GET]
-app.get(apiPath + version + '/arts', (req, res) => {
-    return res.status(200)
+app.get(apiPath + '/art', async function(req, res) {
+  const art = await artService.getAllArt();
+  return res.json(art);
 });
 
 // /api/arts/:artsid [GET]
