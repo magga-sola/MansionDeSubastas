@@ -38,7 +38,10 @@ app.get(apiPath + '/art', async function(req, res) {
 // /api/art/:artid [GET]
 app.get(apiPath + '/art/:artId', async function(req, res) {
     const artId = req.params.artId;
-    const art = await artService.getArtById(artId);
+    const art = await artService.getArtById(artId)
+    if (art === null){
+        return res.status(404).json({"message":"Art with ID" + req.params.artId + "does not exist"});
+    }
     return res.json(art);
 });
 
@@ -61,6 +64,9 @@ app.get(apiPath + '/artists', async function(req, res) {
 app.get(apiPath + '/artists/:artistId', async function(req, res) {
     const artistId = req.params.artistId;
     const artist = await artistService.getArtistById(artistId);
+    if (!artist){
+        return res.status(404).json({"message":"Artist with ID" + req.params.artistId + "does not exist"});
+    }
     return res.json(artist);
 });
 
@@ -81,10 +87,13 @@ app.get(apiPath + '/customers', async function(req, res) {
 
 // /api/customers/:id [GET]
 app.get(apiPath + '/customers/:customerId', async function(req, res) {
-  const customerId = req.params.customerId;
-  const customer = await customerService.getCustomerById(customerId);
-  return res.json(customer);
-});
+    const customerId = req.params.customerId;
+    const customer = await customerService.getCustomerById(customerId);
+        if (!art){
+            return res.status(404).json({"message":"Customer with ID" + req.params.customerId + "does not exist"});
+        }
+    return res.json(customer);
+    });
 
 // /api/customers [POST]
 app.post(apiPath + '/customers', function(req, res) {
@@ -99,6 +108,9 @@ app.post(apiPath + '/customers', function(req, res) {
 app.get(apiPath + '/customers/:customerId/bids', async function(req, res) {
     const customerId = req.params.customerId;
     const auctionBids = await customerService.getAuctionbidsByCustomerId(customerId);
+    if (!auctionBids){
+        return res.status(404).json({"message":"Auction bid with customer ID" + req.params.customerId + "does not exist"});
+    }
     return res.status(200).json(auctionBids);
   });
 
@@ -113,6 +125,9 @@ app.get(apiPath + '/auctions', async function(req, res) {
 app.get(apiPath + '/auctions/:auctionId', async function(req, res) {
     const auctionId = req.params.auctionId;
     const auction = await auctionService.getAuctionById(auctionId);
+    if (!auction){
+        return res.status(404).json({"message":"Auction with ID" + req.params.auctionId + "does not exist"});
+    }
     return res.json(auction);
 });
 

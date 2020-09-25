@@ -20,12 +20,10 @@ const customerService = () => {
     };
 
     const getCustomerById = async id => {
-      try {
+      return await globalTryCatch(async () => {
         const customer = await Customer.findById(id);
         return customer;
-      } catch(err){
-        return err;
-      }
+      })
     };
 
 
