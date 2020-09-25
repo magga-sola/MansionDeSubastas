@@ -50,7 +50,6 @@ const auctionService = () => {
       }
     };
 
-    //ekki alveg rétt held ég
     function createAuction(auction, successCb, errorCb) {
       Auction.create(auction, function(err, result) {
         if (err) { errorCb(err); }
