@@ -117,7 +117,7 @@ app.get(apiPath + '/auctions/:auctionId', async function(req, res) {
 });
 
 // /api/auctions/:id/winner [GET]
-app.get(apiPath + '/auctions/:auctionId/winner', (req, res) => {
+app.get(apiPath + '/auctions/:auctionId/winner', async function(req, res) {
   auctionId = req.params.auctionId;
   const winner = await auctionService.getWinnerByAuctionId(auctionId);
   return res.json(winner);
