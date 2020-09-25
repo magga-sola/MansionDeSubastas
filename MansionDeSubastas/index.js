@@ -2,7 +2,6 @@ const apiPath = '/api';
 const version = "v1"
 
 const express = require('express');
-var mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
@@ -99,10 +98,12 @@ app.post(apiPath + '/customers', function(req, res) {
   });
 });
 
-// /api/customers/:id/auction-bids [GET]
-app.get(apiPath + '/customers/:customerId/auction-bids', (req, res) => {
-    return res.status(200);
-});
+// /api/customers/:id/auctiobids [GET]
+app.get(apiPath + '/customers/:customerId/bids', async function(req, res) {
+    const customerId = req.params.customerId;
+    const auctionBids = await customerService.getAuctionbidsByCustomerId(customerId);
+    return res.status(200).json(auctionBids);
+  });
 
 // /api/auctions [GET]
 app.get(apiPath + '/auctions', async function(req, res) {
@@ -119,9 +120,12 @@ app.get(apiPath + '/auctions/:auctionId', async function(req, res) {
 });
 
 // /api/auctions/:id/winner [GET]
-app.get(apiPath + '/auctions/:auctionId/winner', (req, res) => {
-    return res.status(200);
+app.get(apiPath + '/auctions/:auctionId/winner', async function(req, res) {
+  auctionId = req.params.auctionId;
+  const winner = await auctionService.getWinnerByAuctionId(auctionId);
+  return res.json(winner);
 });
+
 
 // /api/auctions [POST]
 app.post(apiPath + '/auctions', function(req, res) {
@@ -140,6 +144,29 @@ app.get(apiPath + '/auctions/:auctionId/bids', async function(req, res) {
 });
 
 // /api/auctions/:id/bids [POST]
-app.post(apiPath + '/auctions/:auctionId/bids', (req, res) => {
-    return res.status(200);
+app.post(apiPath + '/auctions/:auctionId/bids', function(req, res) {
+  auctionService.createAuctionBid(req.body, function(auctionBid) {
+    return res.status(200).json(auctionBid);
+  }, function (err) {
+    return res.status(400).json(err);
+  });  
 });
+
+app.post("/api/auctions/:id/bids", function(req, res) {
+  auctionService.createAuctionBid( req.body, function(auctionBid) {
+      return res.status(201).json(auctionBid);
+    },function(err) {
+      return res.status(400).json(err);
+    }
+  );
+});
+
+
+app.get("/api/auctions/:id/bids", async function(req, res) {
+  const result = await auctionService.getBidsByAuctionId(
+    req.params.id
+  );
+  return res.status(result.status).json(result.body);
+});
+
+
