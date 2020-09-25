@@ -6,14 +6,12 @@ var mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
-const artService = require('../services/artService');
-const artistService = require('../services/artistService');
-const auctionService = require('../services/auctionService');
-const customerService = require('../services/costumerService');
-console.log(artService);
+const artService = require('./services/artService');
+const artistService = require('./services/artistService');
+const customerService = require('./services/customerService');
 console.log(artistService);
-console.log(auctionService);
 console.log(customerService);
+console.log(artService);
 
 
 const app = express();
@@ -113,4 +111,3 @@ app.get(apiPath + '/auctions/:auctionId/bids', (req, res) => {
 app.post(apiPath + '/auctions/:auctionId/bids', (req, res) => {
     return res.status(200);
 });
-

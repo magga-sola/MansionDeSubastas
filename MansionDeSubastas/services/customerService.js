@@ -1,18 +1,21 @@
-const { Customer } = require('../data/db');
+//const { Customer } = require('../data/db');
 
 const customers = require('../data/db').Customer;
 const auctionBids = require('../data/db').AuctionBid;
 
-const globalTryCatch = async cb => {
-  try {
-    return await cb();
-  } catch(err) {
-    return err;
-  }
-}
 
 const customerService = () => {
-    const getAllCustomers = () => {
+
+
+    const globalTryCatch = async cb => {
+      try {
+        return await cb();
+      } catch(err) {
+        return err;
+      }
+    }
+
+    const getAllCustomers = async () => {
       return await globalTryCatch(async () => {
         const customers = await Customer.find({});
         return customers

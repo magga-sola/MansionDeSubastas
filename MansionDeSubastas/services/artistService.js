@@ -1,14 +1,14 @@
 const artists = require('../data/db').Artist;
 
-const globalTryCatch = async cb => {
-    try {
-      return await cb();
-    } catch(err) {
-      return err;
-    }
-  }
-
 const artistService = () => {
+
+    const globalTryCatch = async cb => {
+        try {
+          return await cb();
+        } catch(err) {
+          return err;
+        }
+      }
 
     const getAllArtists = async () => {
         return await globalTryCatch(async () => {

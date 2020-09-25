@@ -1,17 +1,17 @@
-const { Auction } = require('../data/db');
+//const { Auction } = require('../data/db');
 
 const auctions = require('../data/db').Auction;
 
-const globalTryCatch = async cb => {
-  try {
-    return await cb();
-  } catch(err) {
-    return err;
-  }
-}
-
     const auctionService = () => {
-        const getAllAuctions = () => {
+
+        const globalTryCatch = async cb => {
+          try {
+            return await cb();
+          } catch(err) {
+            return err;
+          }
+        }
+        const getAllAuctions = async () => {
           return await globalTryCatch(async () => {
             const auctions = await Auction.find({});
             return auctions
@@ -28,7 +28,7 @@ const globalTryCatch = async cb => {
     };
 
     ///api/auctions/:id/winner [GET]
-    // If the auction is not finished the web service should return a status code 409 (Conflict), 
+    // If the auction is not finished the web service should return a status code 409 (Conflict),
     //otherwise it should return the customer which holds the highest bid. If the auction had no bids, it
     //should return a status code 200 (OK) with the message: ‘This auction had no bids.’.
     const getWinnerByAuctionId = () => {
