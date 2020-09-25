@@ -1,11 +1,8 @@
-//const { Customer } = require('../data/db');
-
-const customers = require('../data/db').Customer;
-const auctionBids = require('../data/db').AuctionBid;
+const Customer = require('../data/db').Customer;
+const AuctionBids = require('../data/db').AuctionBid;
 
 
 const customerService = () => {
-
 
     const globalTryCatch = async cb => {
       try {

@@ -6,9 +6,11 @@ var mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
+
 const artService = require('./services/artService');
 const artistService = require('./services/artistService');
 const customerService = require('./services/customerService');
+const auctionService = require('./services/auctionService');
 const app = express();
 
 
@@ -47,7 +49,7 @@ app.post(apiPath + '/art', (req, res) => {
 // /api/artists [GET]
 app.get(apiPath + '/artists', async function(req, res) {
     //return res.status(200);
-    const artists = await artService.getAllArtists();
+    const artists = await artistService.getAllArtists();
     return res.json(artists);
 });
 
@@ -58,7 +60,7 @@ app.get(apiPath + '/artists/:artistId', (req, res) => {
 
 // /api/customers [GET]
 app.get(apiPath + '/customers', async function(req, res) {
-  const customers = await artService.getAllCustomers();
+  const customers = await customerService.getAllCustomers();
   return res.json(customers);
 });
 
@@ -79,7 +81,7 @@ app.get(apiPath + '/customers/:customerId/auction-bids', (req, res) => {
 
 // /api/auctions [GET]
 app.get(apiPath + '/auctions', async function(req, res) {
-  const auctions = await artService.getAllAuctions();
+  const auctions = await auctionService.getAllAuctions();
   return res.json(auctions);
 });
 
