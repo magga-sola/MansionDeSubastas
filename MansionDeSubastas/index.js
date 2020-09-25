@@ -60,8 +60,10 @@ app.get(apiPath + '/artists', async function(req, res) {
 });
 
 // /api/artists/:artistId [GET]
-app.get(apiPath + '/artists/:artistId', (req, res) => {
-    return res.status(200);
+app.get(apiPath + '/artists/:artistId', async function(req, res) {
+    const artistId = req.params.artistId;
+    const artist = await artistService.getArtistById(artistId);
+    return res.json(artist);
 });
 
 // /api/customers [GET]
